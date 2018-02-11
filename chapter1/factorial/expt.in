@@ -1,0 +1,38 @@
+(define (expt b n)
+  (expt-iter b n 1))
+(define (expt-iter b counter product)
+  (if (= counter 0)
+    product
+    (expt-iter b
+               (- counter 1)
+               (* b product))))
+
+(define (even? n)
+  (= (remainder n 2) 0))
+
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1))))))
+
+(define (myexpt b n)
+    (myexpt-iter b n 1))
+
+(define (square x) (* x x))
+
+(define (myexpt-iter b n r)
+  (cond ((= n 0) r)
+        ((even? n) (myexpt-iter (* b b) (/ n 2) r))
+        (else (myexpt-iter b (- n 1) (* b r)))))
+
+
+(expt 4 2)
+(expt 4 3)
+(expt 3 3)
+
+
+(myexpt 4 2)
+(myexpt 4 3)
+(myexpt 3 3)
+(myexpt 3 3)
+
